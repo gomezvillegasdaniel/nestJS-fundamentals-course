@@ -12,7 +12,8 @@ export class TodosService {
   ];
 
   create(createTodoDto: any) {
-    return this.todos.push(createTodoDto);
+    this.todos.push(createTodoDto);
+    return createTodoDto;
   }
 
   remove(id: string) {
