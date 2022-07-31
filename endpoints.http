@@ -10,7 +10,8 @@ POST http://localhost:3000/todos
 content-type: application/json
 
 {
-    "description": "study nest"
+    "name": "wash the car",
+    "description": "with soap"
 }
 
 ### PATCH ToDo
