@@ -1,44 +1,52 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateTodoDto } from '../dto/create-todo.dto';
+import { UpdateTodoDto } from '../dto/update-todo.dto';
 import { Todo } from '../entity/todo.entity';
 
 @Injectable()
 export class TodosService {
-  private todos: Todo[] = [
-    {
-      id: 1,
-      name: 'clean the dishes',
-      description: 'very well',
-    },
-  ];
+  constructor(
+    @InjectRepository(Todo)
+    private readonly todoRepository: Repository<Todo>,
+  ) {}
 
-  create(createTodoDto: any) {
-    this.todos.push(createTodoDto);
-    return createTodoDto;
+  async create(createTodoDto: CreateTodoDto) {
+    const todo = this.todoRepository.create(createTodoDto);
+    return this.todoRepository.save(todo);
   }
 
-  remove(id: string) {
-    const todoIndex = this.todos.findIndex((todo) => todo.id === +id);
-    if (todoIndex >= 0) {
-      this.todos.splice(todoIndex, 1);
+  async remove(id: string) {
+    const todo = await this.findOne(id);
+    return this.todoRepository.remove(todo);
+  }
+
+  async update(id: string, updateTodoDto: UpdateTodoDto) {
+    const todo = await this.todoRepository.preload({
+      id: +id,
+      ...updateTodoDto,
+    });
+    if (!todo) {
+      throw new NotFoundException(`Todo #${id} not found`);
     }
+    return this.todoRepository.save(todo);
   }
 
-  update(id: string, updateTodoDto: any) {
-    const existingTodo = this.findOne(id);
-    if (existingTodo) {
-      // update the existing Todo
-    }
-  }
-
-  findOne(id: string) {
-    const todo = this.todos.find((todo) => todo.id === +id);
+  async findOne(id: string) {
+    const todo = this.todoRepository.findOne({ where: { id: +id } });
     if (!todo) {
       throw new HttpException(`Todo #${id} not found`, HttpStatus.NOT_FOUND);
     }
     return todo;
   }
 
-  findAll() {
-    return this.todos;
+  async findAll() {
+    return this.todoRepository.find();
   }
 }

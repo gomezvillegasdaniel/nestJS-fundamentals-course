@@ -2,7 +2,7 @@
 GET http://localhost:3000/todos?limit=20&offset=10
 
 ### GET ToDo by id
-GET http://localhost:3000/todos/1
+GET http://localhost:3000/todos/3
 
 
 ### POST ToDo
@@ -10,15 +10,16 @@ POST http://localhost:3000/todos
 content-type: application/json
 
 {
-    "name": "wash the car",
-    "description": "with soap"
+    "name": "do the english homework",
+    "description": "chapter 1"
 }
 
 ### PATCH ToDo
-PATCH http://localhost:3000/todos/1
+PATCH http://localhost:3000/todos/3
 content-type: application/json
 
 {
+    "name": "do the biology homework",
     "description": "new description"
 }
 
