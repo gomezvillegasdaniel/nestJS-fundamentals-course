@@ -35,11 +35,14 @@ export class TodosService {
     if (!todo) {
       throw new NotFoundException(`Todo #${id} not found`);
     }
-    return this.todoRepository.save(todo);
+    return await this.todoRepository.save(todo);
   }
 
   async findOne(id: string) {
-    const todo = this.todoRepository.findOne({ where: { id: +id } });
+    const todo = await this.todoRepository.findOne({
+      where: { id: +id },
+      relations: { tags: true },
+    });
     if (!todo) {
       throw new HttpException(`Todo #${id} not found`, HttpStatus.NOT_FOUND);
     }
@@ -47,6 +50,10 @@ export class TodosService {
   }
 
   async findAll() {
-    return this.todoRepository.find();
+    return await this.todoRepository.find({
+      relations: {
+        tags: true,
+      },
+    });
   }
 }
