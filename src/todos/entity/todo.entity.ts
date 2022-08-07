@@ -19,6 +19,6 @@ export class Todo {
   description: string;
 
   @JoinTable()
-  @ManyToMany(() => Tag, (tag) => tag.todos)
-  tags: string[];
+  @ManyToMany(() => Tag, (tag) => tag.todos, { cascade: true })
+  tags: Tag[];
 }

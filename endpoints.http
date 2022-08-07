@@ -11,7 +11,8 @@ content-type: application/json
 
 {
     "name": "do the english homework",
-    "description": "chapter 1"
+    "description": "chapter 2",
+    "tags": ["english", "homework"]
 }
 
 ### PATCH ToDo
