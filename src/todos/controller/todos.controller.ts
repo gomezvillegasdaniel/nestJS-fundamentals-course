@@ -8,6 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CreateTodoDto } from '../dto/create-todo.dto';
 import { UpdateTodoDto } from '../dto/update-todo.dto';
 import { TodosService } from '../service/todos.service';
@@ -17,9 +18,9 @@ export class TodosController {
   constructor(private readonly todosSvc: TodosService) {}
 
   @Get()
-  findAll(@Query() paginationQuery) {
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
     // const { limit, offset } = paginationQuery;
-    return this.todosSvc.findAll();
+    return this.todosSvc.findAll(paginationQuery);
   }
 
   @Get(':id')
