@@ -21,4 +21,7 @@ export class Todo {
   @JoinTable()
   @ManyToMany(() => Tag, (tag) => tag.todos, { cascade: true })
   tags: Tag[];
+
+  @Column({ default: 0 })
+  recommendations: number;
 }

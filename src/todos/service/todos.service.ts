@@ -6,7 +6,8 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Repository } from 'typeorm';
+import { Event } from 'src/events/entities/event.entity';
+import { DataSource, Repository } from 'typeorm';
 import { CreateTodoDto } from '../dto/create-todo.dto';
 import { UpdateTodoDto } from '../dto/update-todo.dto';
 import { Tag } from '../entity/tag.entity';
@@ -19,7 +20,31 @@ export class TodosService {
     private readonly todoRepository: Repository<Todo>,
     @InjectRepository(Tag)
     private readonly tagRepository: Repository<Tag>,
+    private readonly dataSource: DataSource, // inject decorators are not needed anymore
   ) {}
+
+  async recommendTodo(todo: Todo) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      todo.recommendations++;
+      const recommendEvent = new Event();
+      recommendEvent.name = 'recommend_todo';
+      recommendEvent.type = 'todo';
+      recommendEvent.payload = { todoId: todo.id };
+
+      await queryRunner.manager.save(todo);
+      await queryRunner.manager.save(recommendEvent);
+
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
+  }
 
   async create(createTodoDto: CreateTodoDto) {
     const tags = await Promise.all(
