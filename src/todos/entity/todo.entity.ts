@@ -15,7 +15,7 @@ export class Todo {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @JoinTable()
