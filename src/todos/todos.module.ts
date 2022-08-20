@@ -7,6 +7,9 @@ import { Todo } from './entity/todo.entity';
 import { TodosService } from './service/todos.service';
 import { TODO_EXTRA_TAGS } from './todos.constants';
 
+class ConfigService {}
+class DevConfigService {}
+class ProdConfigService {}
 // class MockTodosService {}
 
 @Module({
@@ -15,6 +18,11 @@ import { TODO_EXTRA_TAGS } from './todos.constants';
   // providers: [{ provide: TodosService, useValue: new MockTodosService() }], // use this in case you need to use a mock as a provider
   providers: [
     TodosService,
+    {
+      provide: ConfigService,
+      useClass:
+        process.env.NODE_ENV === 'dev' ? DevConfigService : ProdConfigService,
+    },
     { provide: TODO_EXTRA_TAGS, useValue: ['TAG1', 'TAG2'] },
   ],
   exports: [TodosService],
