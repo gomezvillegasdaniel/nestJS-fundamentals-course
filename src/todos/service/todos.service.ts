@@ -24,7 +24,9 @@ export class TodosService {
     private readonly tagRepository: Repository<Tag>,
     private readonly dataSource: DataSource, // inject decorators are not needed anymore
     @Inject(TODO_EXTRA_TAGS) todoExtraTags: string[],
-  ) {}
+  ) {
+    console.log(todoExtraTags);
+  }
 
   async recommendTodo(todo: Todo) {
     const queryRunner = this.dataSource.createQueryRunner();

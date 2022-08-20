@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Injectable, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Event } from 'src/events/entities/event.entity';
 import { TodosController } from './controller/todos.controller';
@@ -12,18 +12,33 @@ class DevConfigService {}
 class ProdConfigService {}
 // class MockTodosService {}
 
+@Injectable()
+export class TodosExtraTagsFactory {
+  create() {
+    // do something
+    return ['TAG4', 'TAG5', 'TAG6'];
+  }
+}
+
 @Module({
   imports: [TypeOrmModule.forFeature([Todo, Tag, Event])],
   controllers: [TodosController],
   // providers: [{ provide: TodosService, useValue: new MockTodosService() }], // use this in case you need to use a mock as a provider
   providers: [
     TodosService,
+    TodosExtraTagsFactory,
     {
       provide: ConfigService,
       useClass:
         process.env.NODE_ENV === 'dev' ? DevConfigService : ProdConfigService,
     },
-    { provide: TODO_EXTRA_TAGS, useValue: ['TAG1', 'TAG2'] },
+    // { provide: TODO_EXTRA_TAGS, useValue: ['TAG1', 'TAG2'] },
+    {
+      provide: TODO_EXTRA_TAGS,
+      useFactory: (todosExtraTagsFactory: TodosExtraTagsFactory) =>
+        todosExtraTagsFactory.create(),
+      inject: [TodosExtraTagsFactory],
+    },
   ],
   exports: [TodosService],
 })
