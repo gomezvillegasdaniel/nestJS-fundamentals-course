@@ -6,9 +6,12 @@ import { Tag } from './entity/tag.entity';
 import { Todo } from './entity/todo.entity';
 import { TodosService } from './service/todos.service';
 
+// class MockTodosService {}
+
 @Module({
   imports: [TypeOrmModule.forFeature([Todo, Tag, Event])],
   controllers: [TodosController],
+  // providers: [{ provide: TodosService, useValue: new MockTodosService() }], // use this in case you need to use a mock as a provider
   providers: [TodosService],
   exports: [TodosService],
 })
