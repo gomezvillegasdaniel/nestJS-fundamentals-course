@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodosModule } from './todos/todos.module';
 import { TodosRatingModule } from './todos-rating/todos-rating.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { TodosRatingModule } from './todos-rating/todos-rating.module';
       synchronize: true, // your entities will be synced with the database(recommended: disable in prod)
     }),
     TodosRatingModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
