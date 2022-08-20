@@ -10,5 +10,6 @@ import { TodosService } from './service/todos.service';
   imports: [TypeOrmModule.forFeature([Todo, Tag, Event])],
   controllers: [TodosController],
   providers: [TodosService],
+  exports: [TodosService],
 })
 export class TodosModule {}

@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodosModule } from './todos/todos.module';
+import { TodosRatingModule } from './todos-rating/todos-rating.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TodosModule } from './todos/todos.module';
       autoLoadEntities: true, // models will be loaded automatically
       synchronize: true, // your entities will be synced with the database(recommended: disable in prod)
     }),
+    TodosRatingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
