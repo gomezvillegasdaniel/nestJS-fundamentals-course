@@ -1,6 +1,7 @@
 import {
   HttpException,
   HttpStatus,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -12,6 +13,7 @@ import { CreateTodoDto } from '../dto/create-todo.dto';
 import { UpdateTodoDto } from '../dto/update-todo.dto';
 import { Tag } from '../entity/tag.entity';
 import { Todo } from '../entity/todo.entity';
+import { TODO_EXTRA_TAGS } from '../todos.constants';
 
 @Injectable()
 export class TodosService {
@@ -21,6 +23,7 @@ export class TodosService {
     @InjectRepository(Tag)
     private readonly tagRepository: Repository<Tag>,
     private readonly dataSource: DataSource, // inject decorators are not needed anymore
+    @Inject(TODO_EXTRA_TAGS) todoExtraTags: string[],
   ) {}
 
   async recommendTodo(todo: Todo) {
