@@ -27,7 +27,7 @@ export class TodosService {
     @Inject(TODO_EXTRA_TAGS) todoExtraTags: string[],
     private readonly configSvc: ConfigService,
   ) {
-    const databaseHost = this.configSvc.get<string>('DATABASE_HOST');
+    const databaseHost = this.configSvc.get('database.host', 'localhost'); // second argument by default
     console.log('databaseHost:', databaseHost);
     console.log(todoExtraTags);
   }
