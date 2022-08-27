@@ -6,7 +6,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ConfigService } from '@nestjs/config';
+import { ConfigService, ConfigType } from '@nestjs/config';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity';
 import { DataSource, Repository } from 'typeorm';
@@ -15,6 +15,7 @@ import { UpdateTodoDto } from '../dto/update-todo.dto';
 import { Tag } from '../entity/tag.entity';
 import { Todo } from '../entity/todo.entity';
 import { TODO_EXTRA_TAGS } from '../todos.constants';
+import todosConfig from 'src/config/todos.config';
 
 @Injectable()
 export class TodosService {
@@ -26,10 +27,13 @@ export class TodosService {
     private readonly dataSource: DataSource, // inject decorators are not needed anymore
     @Inject(TODO_EXTRA_TAGS) todoExtraTags: string[],
     private readonly configSvc: ConfigService,
+    @Inject(todosConfig.KEY)
+    private readonly todosCfg: ConfigType<typeof todosConfig>,
   ) {
     const databaseHost = this.configSvc.get('database.host', 'localhost'); // second argument by default
     console.log('databaseHost:', databaseHost);
     console.log(todoExtraTags);
+    console.log('todosCfg', todosCfg);
   }
 
   async recommendTodo(todo: Todo) {

@@ -1,6 +1,7 @@
 import { Injectable, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import todosConfig from 'src/config/todos.config';
 import { Event } from 'src/events/entities/event.entity';
 import { Connection } from 'typeorm';
 import { TodosController } from './controller/todos.controller';
@@ -23,7 +24,10 @@ class ProdConfigService {}
 // }
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Todo, Tag, Event]), ConfigModule],
+  imports: [
+    TypeOrmModule.forFeature([Todo, Tag, Event]),
+    ConfigModule.forFeature(todosConfig),
+  ],
   controllers: [TodosController],
   // providers: [{ provide: TodosService, useValue: new MockTodosService() }], // use this in case you need to use a mock as a provider
   providers: [
