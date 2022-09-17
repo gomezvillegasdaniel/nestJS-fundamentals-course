@@ -3,11 +3,13 @@ GET http://localhost:3000/todos?limit=20&offset=10
 
 ### GET ToDo by id
 GET http://localhost:3000/todos/3
-
+content-type: application/json
+Authorization: {{$dotenv API_KEY}}
 
 ### POST ToDo
 POST http://localhost:3000/todos
 content-type: application/json
+Authorization: {{$dotenv API_KEY}}
 
 {
     "name": "do the english homework",
@@ -18,6 +20,7 @@ content-type: application/json
 ### PATCH ToDo
 PATCH http://localhost:3000/todos/3
 content-type: application/json
+Authorization: {{$dotenv API_KEY}}
 
 {
     "name": "do the biology homework",
@@ -27,3 +30,4 @@ content-type: application/json
 ### DELETE ToDo
 DELETE http://localhost:3000/todos/1
 content-type: application/json
+Authorization: {{$dotenv API_KEY}}
