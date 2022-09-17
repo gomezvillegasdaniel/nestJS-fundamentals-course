@@ -7,6 +7,7 @@ import { TodosModule } from './todos/todos.module';
 import { TodosRatingModule } from './todos-rating/todos-rating.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { CommonModule } from './common/common.module';
 import appConfig from './config/app.config';
 
 @Module({
@@ -29,6 +30,7 @@ import appConfig from './config/app.config';
     TodosModule,
     TodosRatingModule,
     DatabaseModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
