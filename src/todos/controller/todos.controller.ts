@@ -20,7 +20,8 @@ export class TodosController {
 
   @Public()
   @Get()
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
+  async findAll(@Query() paginationQuery: PaginationQueryDto) {
+    // await new Promise((resolve) => setTimeout(resolve, 5000)); // simulating a timeout in order to test the timeout interceptor
     // const { limit, offset } = paginationQuery;
     return this.todosSvc.findAll(paginationQuery);
   }
