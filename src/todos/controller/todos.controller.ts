@@ -8,6 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { ParamDecorator } from 'src/common/decorators/param.decorator';
 import { Public } from 'src/common/decorators/public.decorators';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
@@ -21,7 +22,11 @@ export class TodosController {
 
   @Public()
   @Get()
-  async findAll(@Query() paginationQuery: PaginationQueryDto) {
+  async findAll(
+    @ParamDecorator('hello') hello: string,
+    @Query() paginationQuery: PaginationQueryDto,
+  ) {
+    console.log(hello);
     // await new Promise((resolve) => setTimeout(resolve, 5000)); // simulating a timeout in order to test the timeout interceptor
     // const { limit, offset } = paginationQuery;
     return this.todosSvc.findAll(paginationQuery);
