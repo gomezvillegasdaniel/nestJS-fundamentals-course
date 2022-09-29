@@ -8,7 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ParamDecorator } from 'src/common/decorators/param.decorator';
 import { Public } from 'src/common/decorators/public.decorators';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
@@ -17,6 +17,7 @@ import { CreateTodoDto } from '../dto/create-todo.dto';
 import { UpdateTodoDto } from '../dto/update-todo.dto';
 import { TodosService } from '../service/todos.service';
 
+@ApiTags('ToDos')
 @Controller('todos')
 export class TodosController {
   constructor(private readonly todosSvc: TodosService) {}
