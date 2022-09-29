@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { Public } from 'src/common/decorators/public.decorators';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 import { CreateTodoDto } from '../dto/create-todo.dto';
 import { UpdateTodoDto } from '../dto/update-todo.dto';
 import { TodosService } from '../service/todos.service';
@@ -27,7 +28,7 @@ export class TodosController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.todosSvc.findOne(id);
   }
 
