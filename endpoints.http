@@ -4,12 +4,12 @@ GET http://localhost:3000/todos?limit=20&offset=10
 ### GET ToDo by id
 GET http://localhost:3000/todos/3
 content-type: application/json
-Authorization: {{$dotenv API_KEY}}
+Authorization: {{$processEnv NESTJS_API_KEY}}
 
 ### POST ToDo
 POST http://localhost:3000/todos
 content-type: application/json
-Authorization: {{$dotenv API_KEY}}
+Authorization: {{$processEnv NESTJS_API_KEY}}
 
 {
     "name": "do the english homework",
@@ -20,7 +20,7 @@ Authorization: {{$dotenv API_KEY}}
 ### PATCH ToDo
 PATCH http://localhost:3000/todos/3
 content-type: application/json
-Authorization: {{$dotenv API_KEY}}
+Authorization: {{$processEnv NESTJS_API_KEY}}
 
 {
     "name": "do the biology homework",
@@ -30,4 +30,4 @@ Authorization: {{$dotenv API_KEY}}
 ### DELETE ToDo
 DELETE http://localhost:3000/todos/1
 content-type: application/json
-Authorization: {{$dotenv API_KEY}}
+Authorization: {{$processEnv NESTJS_API_KEY}}
