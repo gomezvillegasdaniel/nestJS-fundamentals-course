@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from 'src/database/database.module';
-import { TodosModule } from 'src/todos/todos.module';
+import { DatabaseModule } from 'database/database.module';
+import { TodosModule } from 'todos/todos.module';
 import { TodosRatingService } from './todos-rating.service';
 
 @Module({

@@ -1,8 +1,8 @@
 import { Injectable, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import todosConfig from 'src/config/todos.config';
-import { Event } from 'src/events/entities/event.entity';
+import todosConfig from 'config/todos.config';
+import { Event } from 'events/entities/event.entity';
 import { Connection } from 'typeorm';
 import { TodosController } from './controller/todos.controller';
 import { Tag } from './entity/tag.entity';

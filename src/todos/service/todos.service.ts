@@ -7,15 +7,15 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService, ConfigType } from '@nestjs/config';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Event } from 'src/events/entities/event.entity';
+import { PaginationQueryDto } from 'common/dto/pagination-query.dto';
+import { Event } from 'events/entities/event.entity';
 import { DataSource, Repository } from 'typeorm';
 import { CreateTodoDto } from '../dto/create-todo.dto';
 import { UpdateTodoDto } from '../dto/update-todo.dto';
 import { Tag } from '../entity/tag.entity';
 import { Todo } from '../entity/todo.entity';
 import { TODO_EXTRA_TAGS } from '../todos.constants';
-import todosConfig from 'src/config/todos.config';
+import todosConfig from 'config/todos.config';
 
 @Injectable()
 export class TodosService {

@@ -1,7 +1,7 @@
-import { TodoRefactor1660413916391 } from 'src/migrations/1660413916391-TodoRefactor';
-import { SchemaSync1660415276830 } from 'src/migrations/1660415276830-SchemaSync';
-import { Tag } from 'src/todos/entity/tag.entity';
-import { Todo } from 'src/todos/entity/todo.entity';
+import { TodoRefactor1660413916391 } from 'migrations/1660413916391-TodoRefactor';
+import { SchemaSync1660415276830 } from 'migrations/1660415276830-SchemaSync';
+import { Tag } from 'todos/entity/tag.entity';
+import { Todo } from 'todos/entity/todo.entity';
 import { DataSource } from 'typeorm';
 
 export default new DataSource({

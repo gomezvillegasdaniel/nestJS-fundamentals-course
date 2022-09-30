@@ -9,10 +9,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ParamDecorator } from 'src/common/decorators/param.decorator';
-import { Public } from 'src/common/decorators/public.decorators';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
+import { ParamDecorator } from 'common/decorators/param.decorator';
+import { Public } from 'common/decorators/public.decorators';
+import { PaginationQueryDto } from 'common/dto/pagination-query.dto';
+import { ParseIntPipe } from 'common/pipes/parse-int.pipe';
 import { CreateTodoDto } from '../dto/create-todo.dto';
 import { UpdateTodoDto } from '../dto/update-todo.dto';
 import { TodosService } from '../service/todos.service';
