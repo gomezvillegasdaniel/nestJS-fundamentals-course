@@ -31,3 +31,7 @@ Authorization: {{$processEnv NESTJS_API_KEY}}
 DELETE http://localhost:3000/todos/1
 content-type: application/json
 Authorization: {{$processEnv NESTJS_API_KEY}}
+
+### GET /
+GET http://localhost:3000
+Authorization: {{$processEnv NESTJS_API_KEY}}
