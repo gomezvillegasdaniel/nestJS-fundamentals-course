@@ -2,13 +2,16 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from 'app.module';
+import { DBConfig } from 'test/db.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
+  console.log(DBConfig);
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, TypeOrmModule.forRoot(DBConfig)],
     }).compile();
 
     app = moduleFixture.createNestApplication();
